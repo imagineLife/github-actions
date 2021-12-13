@@ -1,0 +1,25 @@
+# first workflow file here
+# must be yml 
+
+# the workflow name
+name: Shell Commands  
+
+# WHEN this will run
+on: [ push ]
+
+# Obj of jobs
+jobs:
+  # job name
+  # Job names must me kebab cased
+  # val is an object
+  run-shell-command:  
+    # type of vm to run on
+    runs-on: ubuntu-latest
+    # arr of objs, representing steps
+    steps:
+      - name: echo a string
+        run: echo "first workflow done-zo!!"
+      - name: multiline echo
+        run: |
+          node -v
+          npm -v
