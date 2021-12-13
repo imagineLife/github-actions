@@ -21,5 +21,7 @@ jobs:
         run: echo "first workflow done-zo!!"
       - name: multiline echo
         run: |
+          echo "node version:"
           node -v
+          echo "npm version"
           npm -v
