@@ -1,5 +1,5 @@
 # github-actions
-Working with Github CI-CD &amp; Automation
+Working with Github CI-CD & Automation
 
 ## Terminology Overview
 **Github Actions**  
@@ -24,3 +24,17 @@ Runners run jobs. Runners run jobs when events happen.
 Runners get hosted by Github OR hosted elsewhere.  
 **Github has hosted runners** with commonly-used software: curl, git, npm, yarn, pip, python, ruby, node, etc.  
 **Self-hosting a runner** allows for more flexibility around the runner: which OS is on the machine, hardware limits, etc.  
+
+
+## The Order Here
+- [Initial Workflow](/2-setup-workflow)
+  - Workflow directory requirements
+  - workflow parts
+    - name
+    - on
+    - jobs (_env, os to run on, list of steps_)
+- [Running steps on different shell types](/3-use-diff-shells)
+- [Running multiple jobs](/4-multiple-jobs)
+  - same environment, running on different os, with different steps
+- [Running Jobs Synchronously](/4-multiple-jobs)
+  - telling a job that it "needs" another job to finish before running
