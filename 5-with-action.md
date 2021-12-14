@@ -34,3 +34,7 @@ jobs:
       - name: Logging Greeting Time
         run: echo "${{ steps.helloworld.outputs.time }}"
 ```
+### What this action does
+According to the [action repo docs](https://github.com/actions/checkout), this action `...checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.`
+- fetches the repo for the runner to access the repo code
+- 

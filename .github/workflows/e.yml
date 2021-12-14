@@ -18,17 +18,24 @@ jobs:
         # id, used in second step below
         id: helloworld
         # new key! 
-        # referrs to an action
-        # can be written in same repo, & reference the path to the action
+        # refers to an action
+        # the action code can be written in same repo, & reference the path to the action
         # can reference a publicly available action
         # references a public action
         # reference the master branch
         # CAN reference a commit sha, definitely more stable
         uses: actions/hello-world-javascript-action@main
-        # takes a param, 'who-to-greet'
+        # takes a param, 'who-to-greet' (see the action repo docs)
         with:
           who-to-greet: "Joesiph Schmo-sif"
       - name: Logging Greeting Time
         # referencing the previous step!
         # the outputs.time is part of the action
         run: echo "${{ steps.helloworld.outputs.time }}"
+      # THIS will only work because of the action
+      # logging content WITHOUT checking out the repo in the runner will
+      #  show that the repo files are not in the runner
+      - name: List repo docs after action
+        run: |
+        pwd
+        ls -a
