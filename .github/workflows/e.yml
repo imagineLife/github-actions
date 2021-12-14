@@ -14,6 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     # arr of objs, representing steps
     steps:
+      - name: List Files Before action
+        run: |
+          pwd
+          ls -a
       - name: js action
         # id, used in second step below
         id: helloworld
@@ -37,5 +41,5 @@ jobs:
       #  show that the repo files are not in the runner
       - name: List repo docs after action
         run: |
-        pwd
-        ls -a
+          pwd
+          ls -a
