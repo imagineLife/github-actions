@@ -9,7 +9,7 @@ jobs:
   # job name, must me kebab cased && val is an object
   run-github-actions:  
     # run on the "learning" environment
-    environment: learning
+    environment: logless-learning
     # type of vm to run on
     runs-on: ubuntu-latest
     # arr of objs, representing steps
