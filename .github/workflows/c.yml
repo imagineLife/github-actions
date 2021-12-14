@@ -1,0 +1,38 @@
+# the workflow name
+name: Shell Commands With Alternate Shell AND parallel jobs 
+
+# WHEN this will run
+on: [ push ]
+
+# Obj of jobs
+jobs:
+  # job name, must me kebab cased && val is an object
+  run-shell-command:  
+    # run on the "learning" environment
+    environment: learning
+    # type of vm to run on
+    runs-on: ubuntu-latest
+    # arr of objs, representing steps
+    steps:
+      - name: echo a string
+        run: echo "first workflow done-zo!!"
+      - name: multiline echo
+        run: |
+          echo "node version:"
+          node -v
+          echo "npm version"
+          npm -v
+      - name: python Command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
+  first-parallel-job:
+    environment: learning
+    runs-on: windows-latest
+    steps:
+      - name: Output Dir in Powershell
+        run: pwd
+      - name: Output dir in Bash
+        run: pwd
+        shell: bash
