@@ -1,0 +1,26 @@
+# the workflow name
+name: Run Checkout Action
+
+# WHEN this will run
+on: [ push ]
+
+# Obj of jobs
+jobs:
+  # job name, must me kebab cased && val is an object
+  run-github-checkout-action:  
+    # run on the "learning" environment
+    environment: logless-learning
+    # type of vm to run on
+    runs-on: ubuntu-latest
+    # arr of objs, representing steps
+    steps:
+      - name: List Files Before action
+        run: |
+          pwd
+          ls -a
+      - name: checkout action
+        uses: actions/checkout@v1
+      - name: List repo docs after checkout action
+        run: |
+          pwd
+          ls -a
