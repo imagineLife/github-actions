@@ -24,3 +24,11 @@ on:
   pull_request:
     [closed, assigned, opened, reopened]
 ```
+
+## Trigger on a schedule
+```yaml
+on:
+  schedule:
+    # every 5 min
+    - cron: "0/5 * * * *"
+```
