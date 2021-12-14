@@ -76,3 +76,6 @@ Perhaps we want to checkout the repo ourselves. Some env vars are already availa
   - name of the repo
 - $GITHUB_WORKSPACE
   - the `pwd` in the workspace
+- `${{github}}` which apparently has a bunch of stuff in it including `token`
+
+These could be used to leverage the github cli _in the workflow directly_ (_git login, git checkout, etc_)
