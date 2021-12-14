@@ -27,7 +27,7 @@ jobs:
           import platform
           print(platform.processor())
         shell: python
-  first-parallel-job:
+  first-synchronous-job:
     environment: learning
     runs-on: windows-latest
     # an arr of other jobs that THIS job depends on
