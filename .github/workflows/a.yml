@@ -2,7 +2,7 @@
 # must be yml 
 
 # the workflow name
-name: Shell Commands  
+name: Shell Commands A  
 
 # WHEN this will run
 on: [ push ]
