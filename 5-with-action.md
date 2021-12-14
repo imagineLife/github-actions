@@ -66,3 +66,13 @@ According to the [action repo docs](https://github.com/actions/checkout), this a
 - allows for the success of the `ls -a` command to 
   - show the contents of the repository in the terminal output 
   - have access to the repository in the runner
+  - checks out the COMMIT SHA that "triggered" the latest workflow to run
+
+### Some env vars are already in the runner
+Perhaps we want to checkout the repo ourselves. Some env vars are already available through the github runner:
+- GITHUB_SHA
+  - the sha of the commit
+- GUTHUB_REPOSITORY
+  - name of the repo
+- $GITHUB_WORKSPACE
+  - the `pwd` in the workspace
