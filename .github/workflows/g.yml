@@ -2,7 +2,7 @@
 name: Run on pull-request and push
 
 # WHEN this will run
-on: [ push ]
+on: [ push, pull_request ]
 
 # Obj of jobs
 jobs:
