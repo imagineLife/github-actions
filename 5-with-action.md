@@ -63,3 +63,6 @@ jobs:
 ### What this action does
 According to the [action repo docs](https://github.com/actions/checkout), this action `...checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.`
 - fetches the repo for the runner to access the repo code
+- allows for the success of the `ls -a` command to 
+  - show the contents of the repository in the terminal output 
+  - have access to the repository in the runner
