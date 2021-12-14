@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     # arr of objs, representing steps
     steps:
-      - name: List Files Before action
-        run: |
-          pwd
-          ls -a
       - name: js action
         # id, used in second step below
         id: helloworld
@@ -36,10 +32,3 @@ jobs:
         # referencing the previous step!
         # the outputs.time is part of the action
         run: echo "${{ steps.helloworld.outputs.time }}"
-      # THIS will only work because of the action
-      # logging content WITHOUT checking out the repo in the runner will
-      #  show that the repo files are not in the runner
-      - name: List repo docs after action
-        run: |
-          pwd
-          ls -a
