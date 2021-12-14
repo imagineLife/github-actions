@@ -22,5 +22,7 @@ jobs:
         uses: actions/checkout@v1
       - name: List repo docs after checkout action
         run: |
+          echo "PWD HERE: ->"
           pwd
+          echo "LS -A HERE: ->"
           ls -a

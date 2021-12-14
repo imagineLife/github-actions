@@ -13,7 +13,7 @@ In `e.yml`, the action called `hello-world-javascript-action` is used. This take
 ### Referencing other steps
 - steps can reference other steps using `${{}}` syntax
 
-## An Example
+## Another Example
 Here is a brief example. for a yaml with more comments, see `e.yml`.  
 For simplicity sake, this is 14 lines long.  
 The commented `e.yml` gives some explanation for the lines in the file. 
@@ -35,6 +35,31 @@ jobs:
         run: echo "${{ steps.helloworld.outputs.time }}"
 ```
 ### What this action does
+This allows the logging of an input var, the _who-to-greet_ var, to the runner log. This is an intro to using a 3rd party action.  
+
+## Another Example cloning the repo into the runner
+```yaml
+name: Run Checkout Action
+on: [ push ]
+jobs:
+  run-github-checkout-action:  
+    environment: logless-learning
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Files Before action
+        run: |
+          pwd
+          ls -a
+      - name: checkout action
+        uses: actions/checkout@v1
+      - name: List repo docs after checkout action
+        run: |
+          echo "-- pwd ->"
+          pwd
+          echo "-- ls -a ->"
+          ls -a
+
+```
+### What this action does
 According to the [action repo docs](https://github.com/actions/checkout), this action `...checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.`
 - fetches the repo for the runner to access the repo code
-- 
