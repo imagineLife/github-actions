@@ -7,7 +7,7 @@ on: [ push ]
 # Obj of jobs
 jobs:
   # job name, must me kebab cased && val is an object
-  run-github actions:  
+  run-github-actions:  
     # run on the "learning" environment
     environment: learning
     # type of vm to run on
