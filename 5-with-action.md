@@ -63,3 +63,19 @@ jobs:
 ### What this action does
 According to the [action repo docs](https://github.com/actions/checkout), this action `...checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.`
 - fetches the repo for the runner to access the repo code
+- allows for the success of the `ls -a` command to 
+  - show the contents of the repository in the terminal output 
+  - have access to the repository in the runner
+  - checks out the COMMIT SHA that "triggered" the latest workflow to run
+
+### Some env vars are already in the runner
+Perhaps we want to checkout the repo ourselves. Some env vars are already available through the github runner:
+- GITHUB_SHA
+  - the sha of the commit
+- GUTHUB_REPOSITORY
+  - name of the repo
+- $GITHUB_WORKSPACE
+  - the `pwd` in the workspace
+- `${{github}}` which apparently has a bunch of stuff in it including `token`
+
+These could be used to leverage the github cli _in the workflow directly_ (_git login, git checkout, etc_)
