@@ -28,3 +28,30 @@ jobs:
         shell: bash
 ```
 
+## Run jobs synchronously
+Declare in a job a `needs` key with a list of other jobs to "wait" on...
+```yaml
+name: for notes
+on: [ push ]
+jobs:
+  # job name, must me kebab cased && val is an object
+  run-shell-command:  
+    # run on the "learning" environment
+    environment: learning
+    # type of vm to run on
+    runs-on: ubuntu-latest
+    # arr of objs, representing steps
+    steps:
+      - name: echo a string
+        run: echo "first workflow done-zo!!"
+  first-parallel-job:
+    environment: learning
+    runs-on: windows-latest
+    needs: ["run-shell-command"]
+    steps:
+      - name: Output Dir in Powershell
+        run: pwd
+      - name: Output dir in Bash
+        run: pwd
+        shell: bash
+```
