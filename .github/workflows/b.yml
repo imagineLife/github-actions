@@ -2,7 +2,7 @@
 # must be yml 
 
 # the workflow name
-name: Shell Commands  
+name: Shell Commands With Alternate Shell  
 
 # WHEN this will run
 on: [ push ]
