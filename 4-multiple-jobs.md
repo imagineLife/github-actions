@@ -30,6 +30,8 @@ jobs:
 
 ## Run jobs synchronously
 Declare in a job a `needs` key with a list of other jobs to "wait" on...
+(_see d.yml for the example_)  
+
 ```yaml
 name: for notes
 on: [ push ]
