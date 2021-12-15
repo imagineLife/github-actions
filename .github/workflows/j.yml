@@ -15,6 +15,9 @@ on:
       - v1.*
     paths:
       - '**.js'
+      # cannot combine with paths-ignore
+      # paths-ignore will... ignore paths...
+      - '!*.test.js' # will IGNORE this file name regex pattern
 jobs:
   checkout-with-filter:  
     environment: logless-learning
