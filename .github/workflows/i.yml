@@ -6,7 +6,7 @@ on:
     # this string, run_from_api, is required in the request api 
     #   to trigger this manually using the event_type key/val pair
     #   should return a 204 on success
-    types: manual_wf
+    types: [manual_wf]
 jobs:
   checkout-from-manual:  
     environment: logless-learning
