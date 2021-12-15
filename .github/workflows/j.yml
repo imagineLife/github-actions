@@ -1,0 +1,34 @@
+# the workflow name
+name: Run with filtering
+
+on: 
+  push:
+    # blam, filter on a branch
+    branches:
+      - master
+      - 'feature/*'
+      #  see the 'feature/*' for all feature branches, but will NOT match another '/'
+      # could be 'feature/**' for any character including `feature/water/melon`
+      # cannot use branches-ignore at the same time
+      # branches-ignore will...ignore branches 
+    tags:
+      - v1.*
+    paths:
+      - '**.js'
+jobs:
+  checkout-with-filter:  
+    environment: logless-learning
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Files Before action
+        run: |
+          pwd
+          ls -a
+      - name: checkout action
+        uses: actions/checkout@v1
+      - name: List repo docs after checkout action
+        run: |
+          echo "PWD HERE: ->"
+          pwd
+          echo "LS -A HERE: ->"
+          ls -a
