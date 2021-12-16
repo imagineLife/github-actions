@@ -1,37 +1,27 @@
 # the workflow name
-name: Run with filtering
+name: Run with env vars
+on: push
+# pass env vars as obj
+env:
+  # keys here are available in ALL JOBS below
+  WF_ENV: Available to all jobs
 
-on: 
-  push:
-    # blam, filter on a branch
-    branches:
-      - master
-      - 'feature/*'
-      #  see the 'feature/*' for all feature branches, but will NOT match another '/'
-      # could be 'feature/**' for any character including `feature/water/melon`
-      # cannot use branches-ignore at the same time
-      # branches-ignore will...ignore branches 
-    tags:
-      - v1.*
-    paths:
-      - '**.js'
-      # cannot combine with paths-ignore
-      # paths-ignore will... ignore paths...
-      - '!*.test.js' # will IGNORE this file name regex pattern
 jobs:
-  checkout-with-filter:  
-    environment: logless-learning
+  log-env:
+    # keys here are ONLY available in THIS job
+    env:
+      LOG_ENV_VAR: only available in log-env step
     runs-on: ubuntu-latest
     steps:
-      - name: List Files Before action
+      - name: Log Env Vars
+        env: 
+          STEP_VAR: only available in Log Env Vars step
         run: |
-          pwd
-          ls -a
-      - name: checkout action
-        uses: actions/checkout@v1
-      - name: List repo docs after checkout action
+          echo "WF_ENV: ${WF_ENV}"
+          echo "LOG_ENV_VAR: ${LOG_ENV_VAR}"
+          echo "STEP_VAR: ${STEP_VAR}"
+      - name: second step
         run: |
-          echo "PWD HERE: ->"
-          pwd
-          echo "LS -A HERE: ->"
-          ls -a
+          echo "WF_ENV: ${WF_ENV}"
+          echo "LOG_ENV_VAR: ${LOG_ENV_VAR}"
+          echo "STEP_VAR: ${STEP_VAR}"
