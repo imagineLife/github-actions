@@ -20,10 +20,10 @@ jobs:
           echo "set git config:"
           git config --global user.email "ericjlaursen@gmail.com"
           git config --global user.name "Jake"
-          echo "checkout master:"
-          git checkout master
-          echo "set branch to master:"
-          git branch --set-upstream-to=origin/master
+          echo "checkout main:"
+          git checkout main
+          echo "set branch to main:"
+          git branch --set-upstream-to=origin/main
           echo "git pull:"
           git pull
           echo "ls -a:"
