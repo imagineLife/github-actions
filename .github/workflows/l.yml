@@ -34,7 +34,7 @@ jobs:
           ls -a
           echo $RANDOM >> randoNumber.txt
           echo "should show randoNumber.txt:"
-          la -a
+          ls -a
           echo "git add, commit and push:"
           git add -a
           git commit -m 'message from workflow'
