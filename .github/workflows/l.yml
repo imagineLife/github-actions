@@ -32,9 +32,11 @@ jobs:
           echo "set git config"
           git config --global user.email "test-email-from-workflow@asdf.com"
           git config --global user.name "workflow-bot"
-          echo "checkoout main, set branch and pull"
+          echo "checkout main"
           git checkout main
+          echo "set branch to main"
           git branch --set-upstream-to=origin/main
+          echo "git pull"
           git pull
           echo "ls -a:"
           ls -a
