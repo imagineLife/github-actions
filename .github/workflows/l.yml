@@ -23,6 +23,7 @@ jobs:
           git config --global user.name "Jake"
           echo "--LOGGING GIT CONFIG"
           git config --list
+          git fetch
           echo "checkout main:"
           git checkout main
           echo "set branch to main:"
