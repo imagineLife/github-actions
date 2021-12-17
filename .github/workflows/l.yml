@@ -29,19 +29,19 @@ jobs:
           git init
           echo "git remote add origin:"
           git remote add origin "https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git"
-          echo "set git config"
+          echo "set git config:"
           git config --global user.email "test-email-from-workflow@asdf.com"
           git config --global user.name "workflow-bot"
-          echo "checkout main"
+          echo "checkout main:"
           git checkout main
-          echo "set branch to main"
+          echo "set branch to main:"
           git branch --set-upstream-to=origin/main
-          echo "git pull"
+          echo "git pull:"
           git pull
           echo "ls -a:"
           ls -a
           echo $RANDOM >> randoNumber.txt
-          echo "should show randoNumber.txt"
+          echo "should show randoNumber.txt:"
           la -a
           echo "git add, commit and push:"
           git add -a
