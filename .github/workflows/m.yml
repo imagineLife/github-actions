@@ -2,7 +2,7 @@ name: Decrypt content
 on: push
 jobs:
   decrypt-the-stuff:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
       # checkout the current repo, included the encrypted file!
       - uses: actions/checkout@v1
