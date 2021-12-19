@@ -1,0 +1,16 @@
+name: Print Function Deets
+on: Push
+jobs:
+  show-text:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print a bunch of stuff
+        run: |
+         echo "${{contains('hello', 'll')}}"
+         echo ${{contains('hello', 'll')}}
+         echo "${{startsWith('hello', 'he')}}"
+         echo ${{startsWith('hello', 'he')}}
+         echo "${{endsWith('hello', 'lo')}}"
+         echo ${{endsWith('hello', 'lo')}}
+         echo "${{format('Hello {0} {1} {2}', 'World', '!', '!')}}"
+         echo ${{format('Hello {0} {1} {2}', 'World', '!', '!')}}
