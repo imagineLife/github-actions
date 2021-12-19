@@ -1,5 +1,5 @@
 name: Print Function Deets
-on: Push
+on: push
 jobs:
   show-text:
     runs-on: ubuntu-latest
