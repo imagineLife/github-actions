@@ -1,0 +1,23 @@
+name: Decrypt content
+on: push
+jobs:
+  decrypt-the-stuff:
+    runs-on: ubuntu:latest
+    steps:
+      # checkout the current repo, included the encrypted file!
+      - uses: actions/checkout@v1
+      - name: Decrypt The File
+        # pull the secret from github
+        env:
+          GPG_SECRET: ${{ secrets.GPG_SECRET }}
+        # gpg tool already installed in github-hosted machine!!
+        # quiet the logs
+        # set answer to always 'yes'
+        # save the output to the home/workflow-secret.json dir/file
+        # parse the encrypted file as input
+        run: gpg  --quiet --batch --yes --decrypt --passphrase="$GPG_SECRET" --output $HOME/workflow-secret.json m-secret.json.gpg
+      - name: Print file content
+        run: cat $HOME/workflow-secret.json
+
+
+

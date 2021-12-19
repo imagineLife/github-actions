@@ -25,8 +25,25 @@ use a tool to encrypt & decrypt values
 - when using, in workflow, decrypt the vals & use them
 
 ## In Action
+### Setup
 - Download `GnuPG` module onto the host
 - build the json file that stores secrets
   - here, `m-secrets.json` is the example
 
 ### Use GPG
+- open a terminal that is in the same dir as the secrets file
+- run a gpg command that will encrypt the secrets json file && create a new encrypted version of the file
+  - here, the command will be `gpg --symmetric --cipher-algo AES256 m-secrets.json`
+  - this will encrypt the `m-secrets.json` and create a sibling file called `m-secrets.json.gpg`
+
+## Setup the Workflow file to leverage gpg 
+The first step here is to store the _same_ secret-key used in pgp on the host machine now inside github as a secret. Github allows a name for the secret, so name it well :)  
+
+the `gpg` tool is installed in the github runner already - epic.  
+
+- build a job
+  - run it on `ubuntu:latest`
+  - give it a step
+    - use the checkout action to pull the repo into the runner, which will include the encrypted file!!
+    - add a named step
+      - run gpg & pass an env var
