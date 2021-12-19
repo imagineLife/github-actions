@@ -15,7 +15,7 @@ jobs:
         # set answer to always 'yes'
         # save the output to the home/workflow-secret.json dir/file
         # parse the encrypted file as input
-        run: gpg  --quiet --batch --yes --decrypt --passphrase="$GPG_SECRET" --output $HOME/workflow-secret.json m-secret.json.gpg
+        run: gpg  --quiet --batch --yes --decrypt --passphrase="$GPG_SECRET" --output $HOME/workflow-secret.json m-secrets.json.gpg
       - name: Print file content
         run: cat $HOME/workflow-secret.json
 
