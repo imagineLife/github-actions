@@ -13,29 +13,29 @@ jobs:
         run: |
           pwd
           ls -a
-          echo "git init:"
+          echo "ECHO: git init"
           git init
-          echo "git remote add origin:"
+          echo "ECHO: git remote add origin"
           git remote add origin https://$GITHUB_ACTOR:${{secrets.GITHUB_TOKEN}}@github.com/$GITHUB_REPOSITORY.git
-          echo "set git config:"
+          echo "ECHO: set git config"
           git config --global init.defaultBranch main
           git config --global user.email "ericjlaursen@gmail.com"
           git config --global user.name "Jake"
-          echo "--LOGGING GIT CONFIG"
+          echo "ECHO: --LOGGING GIT CONFI"
           git config --list
           git fetch
-          echo "checkout main:"
+          echo "ECHO: checkout main"
           git checkout main
-          echo "set branch to main:"
+          echo "ECHO: set branch to main"
           git branch --set-upstream-to=origin/main
-          echo "git pull:"
+          echo "ECHO: git pull"
           git pull
-          echo "ls -a:"
+          echo "ECHO: ls -a"
           ls -a
           echo $RANDOM >> randoNumber.txt
-          echo "should show randoNumber.txt:"
+          echo "ECHO: should show randoNumber.txt"
           ls -a
-          echo "git add, commit and push:"
+          echo "ECHO: git add, commit and push"
           git add .
           git commit -m 'message from workflow'
           git push
