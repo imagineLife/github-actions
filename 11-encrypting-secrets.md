@@ -44,6 +44,9 @@ the `gpg` tool is installed in the github runner already - epic.
 - build a job
   - run it on `ubuntu:latest`
   - give it a step
-    - use the checkout action to pull the repo into the runner, which will include the encrypted file!!
+    - use the checkout action to pull the repo into the runner, which will include the encrypted file
     - add a named step
+      - pass the env var from github `secrets` object
       - run gpg & pass an env var
+    - add another step
+      - print the decrypted file
