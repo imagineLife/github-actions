@@ -1,0 +1,44 @@
+name: Conditional Logging Context Vals
+on: push
+jobs:
+  log-contexts:
+    runs-on: ubuntu-latest
+    # here, the job, itself, is conditional
+    # leveraging the available github obj for event_name
+    if: github.event_name == 'push'
+    steps:
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        # intentional typo, to trigger following if condition
+        run: ecco "$GITHUB_CONTEXT"
+    
+      - name: Dump job context
+        # should run, as previous job failed
+        if: failure()
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "$JOB_CONTEXT"
+    
+      - name: Dump steps context
+        # should run!
+        if: always()
+        env:
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        run: echo "$STEPS_CONTEXT"
+    
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+    
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+    
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
