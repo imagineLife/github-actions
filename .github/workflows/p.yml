@@ -7,6 +7,13 @@ jobs:
     # leveraging the available github obj for event_name
     if: github.event_name == 'push'
     steps:
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+        # force typo error
+        run: eccho "$STRATEGY_CONTEXT"
+        # force continuation through steps through the error
+        continue-on-error: true
 
       - name: Dump GitHub context
         env:
@@ -34,11 +41,6 @@ jobs:
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
         run: echo "$RUNNER_CONTEXT"
-    
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
     
       - name: Dump matrix context
         env:
