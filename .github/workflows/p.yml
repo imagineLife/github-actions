@@ -28,6 +28,8 @@ jobs:
           STEPS_CONTEXT: ${{ toJSON(steps) }}
         run: echo "$STEPS_CONTEXT"
     
+      # because the following steps have no conditions,
+      #   they do not run
       - name: Dump runner context
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
