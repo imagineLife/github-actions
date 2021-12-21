@@ -2,6 +2,8 @@ name: Conditional Logging Context Vals
 on: push
 jobs:
   log-contexts:
+    # max-number of minutes the job can take - this is the default val
+    timeout-minutes: 360
     runs-on: ubuntu-latest
     # here, the job, itself, is conditional
     # leveraging the available github obj for event_name
