@@ -7,7 +7,7 @@ jobs:
     # leveraging the available github obj for event_name
     if: github.event_name == 'push'
     steps:
-      - name: Dump strategy context
+      - name: SHOULD ERR Dump strategy context
         env:
           STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
         # force typo error
@@ -15,7 +15,7 @@ jobs:
         # force continuation through steps through the error
         continue-on-error: true
 
-      - name: Dump GitHub context
+      - name: SHOULD ERR Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         # intentional typo, to trigger following if condition
@@ -37,12 +37,12 @@ jobs:
     
       # because the following steps have no conditions,
       #   they do not run
-      - name: Dump runner context
+      - name: wont-run Dump runner context
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
         run: echo "$RUNNER_CONTEXT"
     
-      - name: Dump matrix context
+      - name: wont-run Dump matrix context
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
