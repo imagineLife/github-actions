@@ -17,6 +17,6 @@ jobs:
         run: node --version
       - name: Dump cur node version
         env:
-          CUR_NODE_VERSION: ${{ node_version}}
+          CUR_NODE_VERSION: ${{ node}}
         run: echo "$CUR_NODE_VERSION"
       
