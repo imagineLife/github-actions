@@ -8,4 +8,4 @@ To introduce conditions into the workflow doc, leverage an `if` key + val. The `
 - `cancelled()`
 - `always()`
 **Jobs** can be conditional.    
-**Steps** can be conditional. Steps take into account the previous step success. See [github docs on "Job statys check functions"](https://docs.github.com/en/actions/learn-github-actions/expressions#job-status-check-functions) for more deets.  
+**Steps** can be conditional. Steps take into account the previous step success. See [github docs on "Job status check functions"](https://docs.github.com/en/actions/learn-github-actions/expressions#job-status-check-functions) for more deets.  
