@@ -1,4 +1,4 @@
-name: Use-Node-Version
+name: Node-Version-w-Matrix
 on: push
 jobs:
   node-version-setup:
