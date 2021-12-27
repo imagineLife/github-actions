@@ -12,11 +12,11 @@ jobs:
         run: node --version
       - uses: actions/setup-node@v1
         with:
-          node-version: '8.x'
+          node-version: ${{ matrix.node }}
       - name: Log Node Version AFTER action
         run: node --version
       - name: Dump cur node version
         env:
-          CUR_NODE_VERSION: ${{ node}}
+          CUR_NODE_VERSION: ${{ matrix.node }}
         run: echo "$CUR_NODE_VERSION"
       
