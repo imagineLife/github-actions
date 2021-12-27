@@ -2,6 +2,7 @@ name: Use-Node-Version
 on: push
 jobs:
   node-version-setup:
+    runs-on: ubuntu-latest
     steps:
       # log the current version of node
       - name: Log Node Version
