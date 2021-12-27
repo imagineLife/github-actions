@@ -1,0 +1,22 @@
+name: Use-Node-Version
+on: push
+jobs:
+  node-version-setup:
+    strategy:
+      matrix:
+        node_version: [12,14,16]
+    runs-on: ubuntu-latest
+    steps:
+      # log the current version of node
+      - name: Log Node Version
+        run: node --version
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '8.x'
+      - name: Log Node Version AFTER action
+        run: node --version
+      - name: Dump cur node version
+        env:
+          CUR_NODE_VERSION: ${{ node_version}}
+        run: echo "$CUR_NODE_VERSION"
+      
