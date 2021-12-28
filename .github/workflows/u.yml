@@ -10,7 +10,7 @@ jobs:
       # api app from example rest api
       app:
         image: alialaa17/node-api
-        port: 
+        ports: 
           - 3001:3000
       # db from dockerhub
       mongo:
