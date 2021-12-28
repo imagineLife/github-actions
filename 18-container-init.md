@@ -2,7 +2,9 @@
 see `t.yml` for an first example.  
 Jobs defined in the yml file can have a `container` block.  
 Each `container` can have "sub" contents - things like image, env vars, and more.  
-To define a container to use, use the image name from dockerhub. in `t.yml`, the `node:14-alpine` image/tag combo is used.
+To define a container to use, use the image name from dockerhub. in `t.yml`, the `node:14-alpine` image/tag combo is used.  
+
+## Running steps in a container
 ```yml
 name: Use-Docker-Container
 on: push
@@ -19,3 +21,16 @@ jobs:
           cat /etc/os-release
 ```  
 The subsequent `steps` run _from the container_, not on the host. Above, the `log node and os` step should show `alpine` as the os, not ubuntu.  
+
+## Leverage An API Container
+Build an API.  
+Include a dockerfile:  
+```Dockerfile
+FROM node:10.13-alpine
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD node app.js
+```

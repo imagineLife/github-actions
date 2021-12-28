@@ -1,0 +1,26 @@
+name: Use-Docker-Compose
+on: push
+jobs:
+  run-compose:
+    runs-on: ubuntu-latest
+    # run a bunch of docker services
+    services:
+
+      # syntax can be copied verbatim from a docker-compose file!!
+      # api app from example rest api
+      app:
+        image: alialaa17/node-api
+        port: 
+          - 3001:3000
+      # db from dockerhub
+      mongo:
+        image: mongo
+        ports:
+          - "27017:27017"
+    steps:
+      - name: POST a user to the api
+        # 3001 is the available port on the runner from the container  
+        run: "curl -x POST http://localhost:3001/api/users 
+        -H 'Content-Type: application/json' -d '{\"username\":\"hello\",\"address\": \"sauce\"}'"
+      - name: GET Users, Validate that post
+        run: "curl http://localhost:3001/api/users"
