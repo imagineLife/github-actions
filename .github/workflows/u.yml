@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: POST a user to the api
         # 3001 is the available port on the runner from the container  
-        run: 'curl -x POST http://localhost:3001/api/user 
+        run: 'curl -X POST http://localhost:3001/api/user 
         -H ''Content-Type: application/json'' -d ''{\"username\":\"hello\",\"address\": \"sauce\"}'''
       - name: GET Users, Validate that post
         run: "curl http://localhost:3001/api/users"
