@@ -1,24 +1,34 @@
-name: Use-Docker-Compose
+name: Use-Containers-In-Steps
 on: push
 jobs:
-  run-compose:
+  containers-in-steps:
     runs-on: ubuntu-latest
-    # run a bunch of docker services
-    services:
-      # syntax can be copied verbatim from a docker-compose file!!
-      # api app from example rest api
-      app:
-        image: alialaa17/node-api
-        ports: 
-          - "3001:3000"
-      # db from dockerhub
-      mongo:
-        image: mongo
-        ports:
-          - "27017:27017"
+    # run this job on a node container
+    # NOTE: these containers MUST run-on ubuntu, cant be macos or windows
+    container:
+      image: node:10.18.0-jessie
     steps:
-      - name: POST a user to the api
-        # 3001 is the available port on the runner from the container  
-        run: 'curl -X POST http://localhost:3001/api/user -H ''Content-Type: application/json'' -d ''{"username": "joe", "address":"schmo"}'''
-      - name: GET Users, Validate that post
-        run: "curl http://localhost:3001/api/users"
+      - name: log-node-v
+        run: node --version
+      - name: use-container-and-echo
+        # NOTE the 'uses' key can use an image
+        # NOTE the `docker://` string prefix
+        uses: docker://node:14-alpine
+        # override the default entrypoint of the container
+        with:
+          # Different syntax than dockerfile entrypoint
+          entrypoint: '/bin/echo'
+          # follow the entrypoint with args
+          args: 'Echo string from node:14 container'
+      - name: use-container
+        uses: docker://node:14-alpine
+        with:
+          entrypoint: '/bin/echo'
+          args: 'Echo THIS string from node:14 container'
+      - name: use-container-log-node-version
+        uses: docker://node:14-alpine
+        with:
+          # path to the node binary
+          entrypoint: '/usr/local/bin/node'
+          args: -v
+
