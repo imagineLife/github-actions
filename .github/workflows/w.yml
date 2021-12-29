@@ -23,5 +23,5 @@ jobs:
         with:
           # path to the bash file
           entrypoint: ./w-script.sh
-          args: "String In Workflow Args line"
+          args: String In Workflow Args line
 
