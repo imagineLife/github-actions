@@ -43,4 +43,4 @@ SLACK_COLOR="#efefef"
 SLACK_USERNAME="github-workflow-automation"
 ```
 - **ENV VARS**: Those env vars can be passed to the workflow file - if some of those env vars are hard-coded in the workflow file, github may block the running of the workflow due to security concerns - nice touch!
-- 
+- the `SLACK_WEBHOOK` var value comes from slack, itself - it is a webhook url. This should get stored in the github secrets store 

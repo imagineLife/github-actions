@@ -1,12 +1,12 @@
-name: Run-Shell-Script-In-Step
+name: Send Slack Msg
 on: push
 jobs:
-  shell-in-step:
+  do-it-all:
     runs-on: ubuntu-latest
     # run this job on a node container
     # NOTE: these containers MUST run-on ubuntu, cant be macos or windows
-    container:
-      image: node:10.18.0-jessie
+    # container:
+    #   image: node:10.18.0-jessie
     steps:
       - name: log-node-v
         run: node --version
@@ -16,12 +16,10 @@ jobs:
           # path to the node binary
           entrypoint: '/usr/local/bin/node'
           args: -v
-      # THIS checkout will give the workflow access to the w-script.sh below
-      - uses: actions/checkout/@v1
-      - name: Run bespoke bash script
-        uses: docker://node:14-alpine
-        with:
-          # path to the bash file
-          entrypoint: ./w-script.sh
-          args: String In Workflow Args line
-
+      - name: send slack message through slack-notify container
+        uses: docker://technosophos/slack-notify
+        env:
+          SLACK_WEBHOOK: ${{secrets.SLACK_WEBHOOK}}
+          SLACK_MESSAGE: "Text hard-coded string in workflow file - imagine some env vars here: branch, commit, action name (push, merge), ...and more?!"
+          SLACK_TITLE: "Handwritten Demo Title!"
+          SLACK_USERNAME: "GH Workflow Man-Made Bot"
