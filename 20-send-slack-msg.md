@@ -20,12 +20,12 @@ Create a step in a workflow
 - name: Send Slack Message
 uses: docker://technosophos/slack-notify
 env:
-  - SLACK_WEBHOOK:
+  - SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   - SLACK_MESSAGE: "Text hard-coded string in workflow file - imagine some env vars here: branch, commit, action name (push, merge), ...and more?!"
 
 ```
 NOTES:
-- The [Slack Notify Image](https://github.com/technosophos/slack-notify) uses slack webhooks to send messages to a slack channel. This leverages some [Environment Variables](https://github.com/technosophos/slack-notify#environment-variables):
+- **The [Slack Notify Image](https://github.com/technosophos/slack-notify)** uses slack webhooks to send messages to a slack channel. This leverages some [Environment Variables](https://github.com/technosophos/slack-notify#environment-variables):
 ```bash  
 # The Slack-assigned webhook
 SLACK_WEBHOOK=https://hooks.slack.com/services/Txxxxxx/Bxxxxxx/xxxxxxxx
@@ -42,5 +42,5 @@ SLACK_COLOR="#efefef"
 # The name of the sender of the message. Does not need to be a "real" username
 SLACK_USERNAME="github-workflow-automation"
 ```
-- Those env vars can be passed to the workflow file - if some of those env vars are hard-coded in the workflow file, github may block the running of the workflow due to security concerns - nice touch!
+- **ENV VARS**: Those env vars can be passed to the workflow file - if some of those env vars are hard-coded in the workflow file, github may block the running of the workflow due to security concerns - nice touch!
 - 
