@@ -1,0 +1,27 @@
+name: Run-Shell-Script-In-Step
+on: push
+jobs:
+  shell-in-step:
+    runs-on: ubuntu-latest
+    # run this job on a node container
+    # NOTE: these containers MUST run-on ubuntu, cant be macos or windows
+    container:
+      image: node:10.18.0-jessie
+    steps:
+      - name: log-node-v
+        run: node --version
+      - name: use-container-log-node-version
+        uses: docker://node:14-alpine
+        with:
+          # path to the node binary
+          entrypoint: '/usr/local/bin/node'
+          args: -v
+      # THIS checkout will give the workflow access to the w-script.sh below
+      - uses: actions/checkout/@v1
+      - name: Run bespoke bash script
+        uses: docker://node:14-alpine
+        with:
+          # path to the bash file
+          entrypoint: ./w-script.sh
+          args: "String In Workflow Args line"
+
