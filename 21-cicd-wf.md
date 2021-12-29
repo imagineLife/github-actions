@@ -13,7 +13,7 @@ a demo `create-react-app`, for the sake of simplicity, will be used here.
 - `npm run build` puts the built output in a `build` dir
   - this `build` dir will need to be deployed in a prod environment
 
-## Surge for deploying The static files
+## Surge PreReqs for deploying The static files
 - install it globally 
   - `npm i -g surge`
 - register with a username + pw
