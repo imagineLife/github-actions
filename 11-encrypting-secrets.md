@@ -1,4 +1,5 @@
 # Encrypting Secrets
+See `m.yml` as an example
 ## A Sample Situation
 Say we have a `secrets.json` file, which has a few values we want secret included (_see 'm-secrets.json' as an example_), something like
 
