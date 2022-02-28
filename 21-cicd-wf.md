@@ -34,8 +34,10 @@ a demo `create-react-app`, for the sake of simplicity, will be used here.
 
 ## Prettier PreReqs
 - install prettier in the repo
-- create a `prettierrc`
+  - `npm install --save-dev prettier`
+- create a `.prettierrc` file
 - ignore files to run prettier against in a `.prettierignore` file
+  - things like `node_modules`, `build`, `coverage`, `package-lock.json`
 - consider adding prettier scripts to a frontend repo
   - `"format:check": "prettier --check \"**/*.js\""`
 
