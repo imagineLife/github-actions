@@ -6,6 +6,9 @@
   - [Surge PreReqs for deploying The static files](#surge-prereqs-for-deploying-the-static-files)
   - [Prettier PreReqs](#prettier-prereqs)
   - [A Workflow Overview](#a-workflow-overview)
+    - [Branching Strategy](#branching-strategy)
+- [Terms](#terms)
+  - [artifacts](#artifacts)
 
 
 Here, a frontend app will be passed through this ci-cd workflow.  
@@ -43,9 +46,10 @@ a demo `create-react-app`, for the sake of simplicity, will be used here.
 
 
 ## A Workflow Overview
+### Branching Strategy
 - Master Branch
 - Develop Branch
-- In order for code to be added to EITHER of those branches, a pull-request needs to be made
+In order for code to be added to EITHER of those branches, a pull-request needs to be made
 
 
 When a new feature needs to be developed...
@@ -106,3 +110,9 @@ When a new feature needs to be developed...
 - On Job failure, create an issue
 - On Issue-creation, send a msg to slack
 - On release creation, send a slack msg
+
+
+
+# Terms
+## artifacts
+Output from a job in a pipeline
