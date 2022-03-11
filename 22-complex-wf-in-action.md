@@ -6,6 +6,7 @@
 - [Create Workflow Steps](#create-workflow-steps)
   - [Develop PR Workflow](#develop-pr-workflow)
     - [Updates AFTER making an MR to Develop](#updates-after-making-an-mr-to-develop)
+  - [Merge-To-Develop Workflow](#merge-to-develop-workflow)
 
 
 ## Create Codeowners
@@ -43,6 +44,7 @@ git checkout init-workflow
 
 ## Develop PR Workflow
 Create the workflow file
+
 ```yaml
 name: CI
 # WHEN
@@ -86,3 +88,58 @@ jobs:
   - protection rules
   - master
     - under the `require status checks to pass`, find the section that reads `Status checks found in the last week for this repository` - this should show the `build` job: check that box to make gitlab ensure the success of the build job :) 
+
+## Merge-To-Develop Workflow
+Here, the existing workflow file COULD be copied && pasted with a single line-change.  
+This has one level of complexity and code repetition.  
+Here, though, the existing Workflow will be updated to work for both use-cases:
+
+
+```yaml
+name: CI
+# WHEN
+# For MR on dev
+# For Merge-to-Dev
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+
+# WHAT
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - uses: actions/checkout@v2
+      
+      # THIS one is optional but better to be explicit
+      - name: Specify Node Version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.17.x"
+      
+      # install mods 
+      - run: npm ci
+
+      # lint check
+      - run: npm run format:check
+
+      # test 
+      - run: npm run test -- --coverage
+        # env for create-react-app test interpretation
+        env:
+          CI: true
+      
+      # 
+      # Only run below when merging to develop
+      # 
+      - name: Build Frontend Assets
+        if: github.event_name =='push'
+        run: npm run build
+      
+      - name: Install Surge and Deploy To Staging
+        if: github.event_name =='push'
+        run: npx surge
+```
