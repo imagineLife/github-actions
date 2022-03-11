@@ -7,6 +7,12 @@
   - [Prettier PreReqs](#prettier-prereqs)
   - [A Workflow Overview](#a-workflow-overview)
     - [Branching Strategy](#branching-strategy)
+  - [Workflow Details](#workflow-details)
+    - [On Pull-Request](#on-pull-request)
+    - [On Merge-To-Develop](#on-merge-to-develop)
+    - [On PR from Dev To Master](#on-pr-from-dev-to-master)
+    - [On Merge-To-Master](#on-merge-to-master)
+- [Common Gotchas](#common-gotchas)
 - [Terms](#terms)
   - [artifacts](#artifacts)
 
@@ -49,67 +55,65 @@ a demo `create-react-app`, for the sake of simplicity, will be used here.
 ### Branching Strategy
 - Master Branch
 - Develop Branch
-In order for code to be added to EITHER of those branches, a pull-request needs to be made
+In order for code to be added to EITHER of those branches, a pull-request needs to be made.  
+**Master** goes to production.  
+**Development** has dev code, not-yet-ready for development.  
 
 
-When a new feature needs to be developed...
-- Create a new branch (_feature branch strategy_)
-- open a PR
-- A workflow will run
-  - code doesn't break tests
-  - formatting matches
-  - ON PASS, someone can review + approve + merge in to develop
-  - wf in depth
-    - install npm dependencies
-    - check code formatting
-    - run tests
-    - upload coverage reports as artifact to be visible
-    - _cache dependencies_
-      - next time the workflow runs, this will reduce dependency-install-time
-- When code gets pushed in develop
-  - a workflow runs
-  - same test + formatting checks run
-  - ON PASS deploy to a staging server
-  - wf in depth
-    - install npm dependencies
-    - check code formatting
-    - run tests
-    - upload coverage reports as artifact to be visible
-    - build project
-    - upload the built content as an artifact
-    - deploy to staging server
-    - _cache dependencies_
-      - next time the workflow runs, this will reduce dependency-install-time
-- On Pull-Request on Develop to Master
-  - a workflow runs
-  - same test + formatting checks run
-  - ON PASS, can be merged t o master
-  - wf in depth
-    - install npm dependencies
-    - check code formatting
-    - run tests
-    - upload coverage reports as artifact to be visible
-    - _cache dependencies_
-      - next time the workflow runs, this will reduce dependency-install-time
-- ON MERGE-TO-Master
-  - a workflow runs
-  - same test + formatting checks run
-  - ON PASS, can be merged t o master
-  - wf in depth
-    - install npm dependencies
-    - check code formatting
-    - run tests
-    - upload coverage reports as artifact to be visible
-    - build project
-    - upload the built content as an artifact
-    - create a release
-    - deploy to prod server
-    - upload coverage report to codecov
+## Workflow Details
+Devs open a branch that will be merge-able to the development branch, do work on their new branch, and make a pull-request to the develop branch.  
 
+### On Pull-Request
+- Dev Opens a pull req on a feature branch to get merged into dev branch
+- Workflow runs
+  - install npm deps (_** would be nice to do other stuff here_)
+  - check code formatting (_prettier + eslint_)
+  - run tests
+  - upload coverage reports as an artifact
+  - cache dependencies
+    - caching will make installing the dependencies on a subsequent workflow MUCH faster
 
-- On Job failure, create an issue
-- On Issue-creation, send a msg to slack
-- On release creation, send a slack msg
+### On Merge-To-Develop
+- dev approves + merges code to dev
+- workflow runs
+  - install npm deps (_** would be nice to do other stuff here_)
+  - check code formatting (_prettier + eslint_)
+  - run tests
+  - upload coverage reports as an artifact
+  - **build the repo**
+  - **upload the build dir as an artifact**
+  - **deploy to staging**
+  - **cache dependencies**
+
+### On PR from Dev To Master
+- this is similar to PR from feat to dev
+- Workflow runs
+  - install npm deps (_** would be nice to do other stuff here_)
+  - check code formatting (_prettier + eslint_)
+  - run tests
+  - upload coverage reports as an artifact
+  - cache dependencies
+    - caching will make installing the dependencies on a subsequent workflow MUCH faster
+  
+### On Merge-To-Master
+- dev approves + merges code to dev
+- this is similar to merge-to-dev
+- workflow runs
+  - install npm deps (_** would be nice to do other stuff here_)
+  - check code formatting (_prettier + eslint_)
+  - run tests
+  - upload coverage reports as an artifact
+  - **build the repo**
+  - **upload the build dir as an artifact**
+  - **Create a release**
+  - **deploy to prod**
+  - **upload coverage report to codecov**
+  - **cache dependencies**
+
+# Common Gotchas
+- **On Job failure**, create & open a github issue
+- **On Issue-creation**, send a msg to slack
+- **On release creation**, send a slack msg
 
 
 
