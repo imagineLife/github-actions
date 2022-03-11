@@ -4,6 +4,8 @@
   - [Create the Repo](#create-the-repo)
   - [Protect the Develop & Master Branches](#protect-the-develop--master-branches)
 - [Create Workflow Steps](#create-workflow-steps)
+  - [Develop PR Workflow](#develop-pr-workflow)
+    - [Updates AFTER making an MR to Develop](#updates-after-making-an-mr-to-develop)
 
 
 ## Create Codeowners
@@ -25,16 +27,21 @@ In Github repo GUI
   - dismiss stale PRs
   - Require reviews from Code Owners
   - Require status checks to pass
+  - 
   - require branches to be up-to-date
   - include admins in the rules (_admins are not above the rules_)
 
 Now, pushing directly to master will not work - a PR must be made.
 
+
 # Create Workflow Steps
+
 Create a new branch
 ```bash
 git checkout init-workflow
 ```
+
+## Develop PR Workflow
 Create the workflow file
 ```yaml
 name: CI
@@ -68,6 +75,14 @@ jobs:
         # env for create-react-app test interpretation
         env:
           CI: true
-      
-      
 ```
+
+### Updates AFTER making an MR to Develop
+- Can Create a MR in Gitlab GUI
+- Upon Merge-Request creation, a workflow should be triggered and running! The workflow yaml file is below
+- update Gitlab GUI to make sure that the `build` job is successful
+  - settings
+  - branches
+  - protection rules
+  - master
+    - under the `require status checks to pass`, find the section that reads `Status checks found in the last week for this repository` - this should show the `build` job: check that box to make gitlab ensure the success of the build job :) 
