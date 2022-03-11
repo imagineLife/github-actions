@@ -20,3 +20,5 @@ In Github repo GUI
   - Require status checks to pass
   - require branches to be up-to-date
   - include admins in the rules (_admins are not above the rules_)
+
+Now, pushing directly to master will not work - a PR must be made.
