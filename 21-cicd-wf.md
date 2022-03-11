@@ -13,6 +13,7 @@
     - [On PR from Dev To Master](#on-pr-from-dev-to-master)
     - [On Merge-To-Master](#on-merge-to-master)
 - [Common Gotchas](#common-gotchas)
+  - [Github Has Releases](#github-has-releases)
 
 
 Here, a frontend app will be passed through this ci-cd workflow.  
@@ -112,3 +113,10 @@ Devs open a branch that will be merge-able to the development branch, do work on
 - **On Job failure**, create & open a github issue
 - **On Issue-creation**, send a msg to slack
 - **On release creation**, send a slack msg
+
+## Github Has Releases
+Each library on Github has a "Releases" Tab.  
+Each release:
+- has a version number
+- can have a changelog
+- can have static assets (_i.e. artifacts_)
