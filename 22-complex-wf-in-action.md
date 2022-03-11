@@ -1,4 +1,11 @@
 # Implementing a Complex Workflow
+- [Implementing a Complex Workflow](#implementing-a-complex-workflow)
+  - [Create Codeowners](#create-codeowners)
+  - [Create the Repo](#create-the-repo)
+  - [Protect the Develop & Master Branches](#protect-the-develop--master-branches)
+- [Create Workflow Steps](#create-workflow-steps)
+
+
 ## Create Codeowners
 - Create a `CODEOWNERS` file in the `.github` dir
   - the `CODEOWNERS` will describe who...owns... the code. This file can categorize and/or define different owners for different files and/or directories in the project. See [Github Docs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) on codeowners for more details
@@ -22,3 +29,45 @@ In Github repo GUI
   - include admins in the rules (_admins are not above the rules_)
 
 Now, pushing directly to master will not work - a PR must be made.
+
+# Create Workflow Steps
+Create a new branch
+```bash
+git checkout init-workflow
+```
+Create the workflow file
+```yaml
+name: CI
+# WHEN
+on:
+  pull_request:
+    branches: [develop]
+
+# WHAT
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - uses: actions/checkout@v2
+      
+      # THIS one is optional but better to be explicit
+      - name: Specify Node Version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.17.x"
+      
+      # install mods 
+      - run: npm ci
+
+      # lint check
+      - run: npm run format:check
+
+      # test 
+      - run: npm run test -- --coverage
+        # env for create-react-app test interpretation
+        env:
+          CI: true
+      
+      
+```
