@@ -141,5 +141,7 @@ jobs:
       
       - name: Install Surge and Deploy To Staging
         if: github.event_name =='push'
-        run: npx surge
+        # tell surge to use the "build" dir
+        # get surge domain
+        run: npx surge --project ./build --domain acidic-clam.surge.sh
 ```
