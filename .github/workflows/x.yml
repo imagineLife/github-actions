@@ -1,0 +1,51 @@
+name: Complex-CI
+# WHEN
+# For MR on dev
+# For Merge-to-Dev
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+
+# WHAT
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - uses: actions/checkout@v2
+      
+      # THIS one is optional but better to be explicit
+      - name: Specify Node Version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.17.x"
+      
+      # install mods 
+      - run: npm ci
+
+      # lint check
+      - run: npm run format:check
+
+      # test 
+      - run: npm run test -- --coverage
+        # env for create-react-app test interpretation
+        env:
+          CI: true
+      
+      # 
+      # Only run below when merging to develop
+      # 
+      - name: Build Frontend Assets
+        if: github.event_name =='push'
+        run: npm run build
+      
+      - name: Install Surge and Deploy To Staging
+        if: github.event_name =='push'
+        # tell surge to use the "build" dir
+        # NOTE: surge env vars are ing github repo secrets
+        run: npx surge --project ./build --domain ${{secrets.SURGE_DOMAIN}}
+        env: 
+          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
