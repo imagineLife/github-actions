@@ -20,7 +20,7 @@ jobs:
       - name: Specify Node Version
         uses: actions/setup-node@v1
         with:
-          node-version: "16.17.x"
+          node-version: "16.17"
       
       # install mods 
       - run: npm ci
