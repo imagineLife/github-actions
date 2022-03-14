@@ -1,4 +1,9 @@
 name: Complex-CI
+
+
+defaults:
+  run:
+    working-directory: fe-build
 # WHEN
 # For MR on dev
 # For Merge-to-Dev
@@ -23,7 +28,7 @@ jobs:
           node-version: "16.14"
       
       # install mods 
-      - run: npm ci
+      - run: npm i
 
       # lint check
       - run: npm run format:check
