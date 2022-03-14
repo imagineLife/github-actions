@@ -1,6 +1,4 @@
 name: Complex-CI
-
-
 defaults:
   run:
     working-directory: fe-build
@@ -15,7 +13,7 @@ on:
 
 # WHAT
 jobs:
-  build:
+  frontend-lint:
     runs-on: ubuntu-latest
     steps:
       # checkout the code
@@ -32,6 +30,20 @@ jobs:
 
       # lint check
       - run: npm run format:check
+  frontend-lint:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout the code
+      - uses: actions/checkout@v2
+      
+      # THIS one is optional but better to be explicit
+      - name: Specify Node Version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.14"
+      
+      # install mods 
+      - run: npm i
 
       # test 
       - run: npm run test -- --coverage
