@@ -1,5 +1,7 @@
 name: Conditional Logging Context Vals
-on: push
+on:
+  push:
+    branches: [horse]
 jobs:
   log-contexts:
     # max-number of minutes the job can take - this is the default val
