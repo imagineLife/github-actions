@@ -30,7 +30,8 @@ jobs:
 
       # lint check
       - run: npm run format:check
-  frontend-lint:
+  
+  frontend-test:
     runs-on: ubuntu-latest
     steps:
       # checkout the code
