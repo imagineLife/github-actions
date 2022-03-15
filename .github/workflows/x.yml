@@ -35,7 +35,7 @@ jobs:
           ${{ runner.os }}-
     - name: Install Dependencies
       if: steps.cache-node-mods.outputs.cache-hit != 'true'
-      run: npm ci
+      run: npm i
   
   frontend-lint:
     runs-on: ubuntu-latest
