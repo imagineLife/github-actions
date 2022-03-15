@@ -63,7 +63,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npm run build
       
-      # - name: Install Surge and Deploy To Staging
+      - name: Install Surge and Deploy To Staging
         if: github.event_name =='pull_request'
         # tell surge to use the "build" dir
         # NOTE: surge env vars are ing github repo secrets
