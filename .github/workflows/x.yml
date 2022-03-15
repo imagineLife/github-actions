@@ -52,8 +52,10 @@ jobs:
         # env for create-react-app test interpretation
         env:
           CI: true
-      - run: echo "$STEPS_CONTEXT"
-      - run: echo "$GITHUB_CONTEXT"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       # 
       # Only run below when merging to develop
       # 
