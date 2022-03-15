@@ -60,7 +60,7 @@ jobs:
           node-version: "16.14"
       
       # install mods 
-      - run: npm i
+      # - run: npm i
 
       # test 
       - run: npm run test -- --coverage
