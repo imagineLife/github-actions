@@ -14,19 +14,28 @@ on:
 # WHAT
 jobs:
   pipeline-setup:
+    
     runs-on: ubuntu-latest
+    
     steps:
-      # checkout the code
-      - uses: actions/checkout@v2
-      
-      # THIS one is optional but better to be explicit
-      - name: Specify Node Version
-        uses: actions/setup-node@v1
-        with:
-          node-version: "16.14"
-      
-      # install mods 
-      - run: npm i
+    - uses: actions/checkout@v2
+    
+    - name: Cache node modules
+      id: cache-node-mods
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # caching node_modules
+        path: node_modules
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install Dependencies
+      if: steps.cache-node-mods.outputs.cache-hit != 'true'
+      run: npm ci
   
   frontend-lint:
     runs-on: ubuntu-latest
