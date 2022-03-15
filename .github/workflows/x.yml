@@ -33,7 +33,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - name: Install Dependencies
+    - name: Conditional Install Dependencies
       if: steps.cache-node-mods.outputs.cache-hit != 'true'
       run: npm i
   
@@ -41,6 +41,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: ["pipeline-setup"]
     steps:
+
+      - uses: actions/checkout@v2
       # lint check
       - run: npm run format:check
   
