@@ -6,10 +6,10 @@ defaults:
 # For MR on dev
 # PLUS conditional steps on Merge-to-Dev
 on:
-  pull_request:
-    branches: [develop]
-  # push:
+  # pull_request:
   #   branches: [develop]
+  push:
+    branches: [wf-on-pr]
 
 # WHAT
 jobs:
