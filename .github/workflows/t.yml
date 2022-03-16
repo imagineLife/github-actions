@@ -1,5 +1,10 @@
 name: Use-Docker-Container
-on: push
+# on: push
+on:
+  pull_request:
+    branches: [horse]
+  push:
+    branches: [cat]
 jobs:
   pull-node-img:
     runs-on: ubuntu-latest
