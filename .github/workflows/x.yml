@@ -99,7 +99,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: build
+          path: fe-build/build
 
       - name: Install Surge and Deploy To Staging
         if: github.event_name =='push'
