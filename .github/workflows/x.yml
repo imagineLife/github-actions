@@ -25,6 +25,31 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "16.14"
+
+      
+      # cache BEFORE npm i to leverage cache
+      # DOCS: 
+      #   https://github.com/actions/cache
+      # TODO: update to v2 
+      - name: cache node-mods
+        uses: actions/cache@v1
+        with:
+          # OS-dependent + package-manager dependent path val
+          # NPM Cache docs:
+          #   https://docs.npmjs.com/cli/v7/configuring-npm/folders#cache
+          path: ~/.npm
+          # key docs: https://github.com/actions/cache#creating-a-cache-key
+          #   os type
+          #   hashing package-lock file for changes
+          key: ${{runner.os}}-node-mods-key-${{ hashFiles('**/package-lock.json') }}
+          # restore-key docs: https://github.com/actions/cache#inputs
+          # same value as previous key
+          # first time it runs the cache, github wont find anything for the cache
+          # prefix-only - the hash will be different each cache
+          # must be regex matching or something
+          restore-keys:  | 
+            ${{runner.os}}-node-mods-key-
+          # ONCE workflow is done, github caches the hashed package-lock with the key :) 
       
       # install mods 
       - run: npm i
@@ -68,3 +93,4 @@ jobs:
         env: 
           SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
           SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+      
