@@ -7,7 +7,7 @@ function App() {
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
         <p>
-          Edit <code>src/App.js</code> and horse dawg.
+          Edit <code>src/App.js</code>, only updates this site on merge-to-dev via complex-ci in `x.yml`.
         </p>
         <a
           className='App-link'
