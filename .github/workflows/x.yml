@@ -73,13 +73,17 @@ jobs:
       # install mods 
       - run: npm i
 
+      # 
       # test 
+      #   
       - run: npm run test -- --coverage
         # env for create-react-app test interpretation
         env:
           CI: true
 
+      # 
       # upload test coverage artifacts docs: https://github.com/actions/upload-artifact
+      # 
       - name: Upload Test Coverage Artifact 
         uses: actions/upload-artifact@v1
         with:
@@ -88,19 +92,25 @@ jobs:
 
 
       # 
-      # Restrict below steps when merging to develop
+      # BUILD frontend assets
+      #   ONLY when merging to develop
       # 
       - name: Build Frontend Assets
         if: github.event_name == 'push'
         run: npm run build
       
+      # 
       # upload frontend build artifacts docs: https://github.com/actions/upload-artifact
+      # 
       - name: Upload Frontend Static Assets 
         uses: actions/upload-artifact@v1
         with:
           name: build
           path: fe-build/build
 
+      # 
+      # deploy to surge server
+      # 
       - name: Install Surge and Deploy To Staging
         if: github.event_name =='push'
         # tell surge to use the "build" dir
