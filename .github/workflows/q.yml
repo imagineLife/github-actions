@@ -1,5 +1,10 @@
 name: Use-Node-Version
-on: push
+# on: push
+on:
+  pull_request:
+    branches: [horse]
+  push:
+    branches: [cat]
 jobs:
   node-version-setup:
     runs-on: ubuntu-latest
