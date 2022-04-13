@@ -118,7 +118,7 @@ jobs:
       - name: Specify Node Version
         uses: actions/setup-node@v1
         with:
-          node-version: "16.17.x"
+          node-version: "16.17"
       
       # install mods 
       - run: npm ci
@@ -142,6 +142,10 @@ jobs:
       - name: Install Surge and Deploy To Staging
         if: github.event_name =='push'
         # tell surge to use the "build" dir
-        # get surge domain
-        run: npx surge --project ./build --domain acidic-clam.surge.sh
+        # NOTE: surge env vars are ing github repo secrets
+        run: npx surge --project ./build --domain ${{secrets.SURGE_DOMAIN}}
+        env: 
+          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+
 ```

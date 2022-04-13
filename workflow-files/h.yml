@@ -2,7 +2,12 @@
 name: Run on pull-request and push
 
 # WHEN this will run
-on: [ push, pull_request ]
+on:
+  pull_request:
+    branches: [horse]
+  push:
+    branches: [cat]
+# on: [ push, pull_request ]
   # every 5 min !!!
   # schedule: "0/5 * * * *"
 
